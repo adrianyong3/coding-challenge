@@ -43,7 +43,7 @@ end
 
 Then("complete all active todos") do
   Todo.complete_all_active_todos
-  total_compeleted = Todo.count_completed_todos
+  total_compeleted = Todo.total_completed_todos
   expect(total_compeleted).to equal 2
 end
 

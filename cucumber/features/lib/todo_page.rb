@@ -24,7 +24,7 @@ module Todo extend self
 		find('#toggle-all').click
 	end
 
-	def count_completed_todos
+	def total_completed_todos
 		all('li.completed').size
 	end
 
