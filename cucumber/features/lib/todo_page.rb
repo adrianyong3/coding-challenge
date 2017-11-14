@@ -28,4 +28,20 @@ module Todo extend self
 		all('li.completed').size
 	end
 
+  def filter_completed
+  	click_link('Completed')
+  end
+
+  def total_todos_displayed
+  	all('#main li').size
+  end
+
+  def delete_completed_todo( todo_text )
+  	find(:xpath, "//label[text()='#{todo_text}']").hover
+  	find(:xpath, "//label[text()='#{todo_text}']/../button").click
+  end
+
+  def clear_all_completed_todos
+  	find('#clear-completed').click
+  end
 end

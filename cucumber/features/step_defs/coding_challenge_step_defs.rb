@@ -44,33 +44,43 @@ end
 Then("complete all active todos") do
   Todo.complete_all_active_todos
   total_compeleted = Todo.total_completed_todos
-  expect(total_compeleted).to equal 2
+  expect(total_compeleted).to eq 2
+  # Clear all todos before finishing the test becuase the app remembers the last session
+  Todo.clear_all_completed_todos
+  total_todos_displayed = Todo.total_todos_displayed
+  expect(total_todos_displayed).to eq 0
 end
 
-Given("I have {int} todos") do |int|
-  pending # Write code here that turns the phrase above into concrete actions
+Given("I have {int} todos") do |total_todos|
+  visit('http://todomvc.com/examples/emberjs/')
+  total_todos.times do |index|
+    Todo.add_new( "todo item #{index}")
+  end
+  total_todos_displayed = Todo.total_todos_displayed
+  expect(total_todos_displayed).to eq total_todos
 end
 
 Given("{int} are completed") do |int|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given("{int} are incomplete") do |int|
-  pending # Write code here that turns the phrase above into concrete actions
+  5.times do |index|
+    Todo.complete_todo( "todo item #{index}")
+  end
 end
 
 When("I filter for completed todos") do
-  pending # Write code here that turns the phrase above into concrete actions
+  Todo.filter_completed
 end
 
-Then("I should see only {int} todos") do |int|
-  pending # Write code here that turns the phrase above into concrete actions
+Then("I should see only {int} todos") do |expected_todos_displayed|
+  total_todos_displayed = Todo.total_todos_displayed
+  expect(total_todos_displayed).to eq expected_todos_displayed
 end
 
 Then("I should be able to clear one of the completed todos") do
-  pending # Write code here that turns the phrase above into concrete actions
+  Todo.delete_completed_todo( 'todo item 0')
 end
 
 Then("I should be able to clear all of the completed todos") do
-  pending # Write code here that turns the phrase above into concrete actions
+  Todo.clear_all_completed_todos
+  total_todos_displayed = Todo.total_todos_displayed
+  expect(total_todos_displayed).to eq 0
 end
