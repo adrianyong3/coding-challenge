@@ -3,15 +3,16 @@ require 'selenium/webdriver'
 require 'byebug'
 
 @chromedriver_path = "#{Dir.pwd}/bin/chromedriver" 
+@geckodriver_path = "#{Dir.pwd}/bin/geckodriver" 
 
 Capybara.register_driver :selenium do |app|
   case ENV['BROWSER']
     when 'firefox'
-      profile = Selenium::WebDriver::Firefox::Profile.from_name 'default'
-      Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile)
+      Selenium::WebDriver::Firefox::driver_path = @geckodriver_path
+      Capybara::Selenium::Driver.new(app, :browser => :firefox)
     when 'chrome'
       Selenium::WebDriver::Chrome::driver_path = @chromedriver_path
-      Capybara::Selenium::Driver.new(app, :browser => :chrome, :switches => %w[--disable-popup-blocking, --disable-extensions, --disable-blink-features=BlockCredentialedSubresources])
+      Capybara::Selenium::Driver.new(app, :browser => :chrome)
     when 'safari'
       Capybara::Selenium::Driver.new(app, :browser => :safari)
     else
