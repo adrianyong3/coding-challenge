@@ -8,9 +8,9 @@ Feature: Coding Challenge
 	Scenario: Go through all the features of the todo app 
 		Given I am on the Ember.js TodoMVC app
 		Then I should be able to add a new todo item called "Buy Pineapples"
-		And edit the todo item to "Buy Oranges"
-		And mark the todo item as complete
-		And re-activate the completed todo
+		And edit the todo item from "Buy Pineapples" to "Buy Oranges"
+		And mark the todo item "Buy Oranges" as complete
+		And re-activate the completed todo item "Buy Oranges"
 		And add a second todo called "Buy Socks"
 		And complete all active todos
 
