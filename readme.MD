@@ -1,4 +1,12 @@
-#Clone the repository first.
+# Run the test in different browsers
+
+Note: The env.rb contains the configuration for setting up different browsers.
+
+Clone the repo
+
+```
+git clone git@github.com:adrianyong3/coding-challenge.git
+```
 
 Run the test in Chrome v60-62:
 ```
@@ -29,7 +37,7 @@ $ cucumber BROWSER=chrome -t @main_features
 $ cucumber BROWSER=chrome -t @filter
 ```
 
-#Difficulties faced
+# Difficulties faced
 
 1. The todo list items had system generated id attributes that made it diffcult to write a selector for each todo list item. Therefore I used xpath selector and based it on the todo name
 
